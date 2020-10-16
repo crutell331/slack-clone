@@ -1,6 +1,5 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
 import firebase from '../firebase'
 import { Dropdown, Grid, GridColumn, GridRow, Header, HeaderContent, Icon, Image } from 'semantic-ui-react'
 
@@ -32,7 +31,6 @@ class UserPanel extends React.Component {
         this.props.history.push('/login')
     }
     render() {
-        console.log(this.props.user)
         return (
             <Grid style={{ background: '#4c3c4c' }}>
                 <GridColumn>

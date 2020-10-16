@@ -41,7 +41,7 @@ class Channels extends React.Component {
     }
 
     setChannel = (channel) => {
-        console.log("set channel")
+        console.log("set channel", channel)
         this.props.setChannel(channel)
         this.setActiveChannel(channel)
     }

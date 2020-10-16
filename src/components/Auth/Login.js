@@ -44,7 +44,6 @@ class Login extends React.Component {
 
 
     render() {
-        console.log("in login")
         return (
             <Grid textAlign="center" verticalAlign="middle" className="app">
                 <GridColumn style={{ maxWidth: "450px" }}>

@@ -7,6 +7,7 @@ import SidePanel from './SidePanel'
 import Messages from './Messages'
 import MetaPanel from './MetaPanel'
 function ChatApp(props) {
+    console.log('Chat app props:', props)
     return (
         <React.Fragment>
             {props.user ? (
@@ -15,7 +16,7 @@ function ChatApp(props) {
                     <SidePanel user={props.user} />
 
                     <Grid.Column style={{ marginLeft: 320 }}>
-                        <Messages />
+                        <Messages channel={props.channel} user={props.user} />
 
                     </Grid.Column>
                     <Grid.Column width={4}>
@@ -29,6 +30,6 @@ function ChatApp(props) {
     )
 }
 function msp(state) {
-    return { user: state.user.user }
+    return { user: state.user.user, channel: state.channel }
 }
 export default connect(msp)(withRouter(ChatApp))

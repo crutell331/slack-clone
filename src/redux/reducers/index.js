@@ -16,25 +16,20 @@ const userReducer = (state = defaultUserState, action) => {
                 user: action.payload,
                 loading: false
             }
-            break;
         case types.CLEAR_USER:
             return { ...state, loading: false }
         default:
             return state
-            break;
     }
 }
 
-const channelReducer = (state = defaultChannelState, action) => {
-    console.log("channel reducer")
+const channelReducer = (state = defaultChannelState.channel, action) => {
     switch (action.type) {
         case types.SET_CHANNEL:
             return action.payload
-            break;
 
         default:
             return state
-            break;
     }
 }
 
