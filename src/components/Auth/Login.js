@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Form, Segment, Button, Header, Message, Icon, GridColumn } from 'semantic-ui-react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import firebase from '../../firebase'
 
 class Login extends React.Component {
@@ -27,8 +27,9 @@ class Login extends React.Component {
             this.setState({ error: null, loading: true })
             firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
                 .then((user) => {
-                    console.log(user)
-                    this.setState({ loading: false })
+                    this.setState({ loading: false }, () => this.props.history.push('/test')
+                    )
+                    console.log("HERE")
                 })
                 .catch(error => {
                     console.log(error)
@@ -43,6 +44,7 @@ class Login extends React.Component {
 
 
     render() {
+        console.log("in login")
         return (
             <Grid textAlign="center" verticalAlign="middle" className="app">
                 <GridColumn style={{ maxWidth: "450px" }}>
@@ -74,4 +76,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+export default withRouter(Login)

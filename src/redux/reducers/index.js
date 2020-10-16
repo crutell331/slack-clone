@@ -7,7 +7,6 @@ const defaultState = {
 }
 
 const userReducer = (state = defaultState, action) => {
-    console.log("in reducer", action.payload)
     switch (action.type) {
         case types.SET_USER:
             return {
@@ -15,7 +14,8 @@ const userReducer = (state = defaultState, action) => {
                 loading: false
             }
             break;
-
+        case types.CLEAR_USER:
+            return { ...state, loading: false }
         default:
             return state
             break;
