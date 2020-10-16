@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import firebase from '../firebase'
-import { Dropdown, Grid, GridColumn, GridRow, Header, HeaderContent, Icon } from 'semantic-ui-react'
+import { Dropdown, Grid, GridColumn, GridRow, Header, HeaderContent, Icon, Image } from 'semantic-ui-react'
 
 class UserPanel extends React.Component {
 
@@ -41,10 +41,13 @@ class UserPanel extends React.Component {
                             <Icon name="code" />
                             <HeaderContent>User Panel</HeaderContent>
                         </Header>
+                        <Header style={{ padding: ".25em" }} as="h4" inverted>
+                            <Dropdown trigger={<span>
+                                <Image src={this.props.user.photoURL} spaced="right" avatar />
+                                {this.props.user.displayName}
+                            </span>} options={this.renderDropdown()} />
+                        </Header>
                     </GridRow>
-                    <Header style={{ padding: ".25em" }} as="h4" inverted>
-                        <Dropdown trigger={<span>{this.props.user.displayName}</span>} options={this.renderDropdown()} />
-                    </Header>
                 </GridColumn>
 
             </Grid>

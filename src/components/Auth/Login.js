@@ -27,7 +27,7 @@ class Login extends React.Component {
             this.setState({ error: null, loading: true })
             firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
                 .then((user) => {
-                    this.setState({ loading: false }, () => this.props.history.push('/test')
+                    this.setState({ loading: false }, () => this.props.history.push('/')
                     )
                     console.log("HERE")
                 })
