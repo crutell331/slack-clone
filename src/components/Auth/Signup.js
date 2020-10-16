@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid, Form, Segment, Button, Header, Message, Icon, GridColumn } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 import firebase from '../../firebase'
+import md5 from 'md5'
 
 class Signup extends React.Component {
     state = {
@@ -10,7 +11,8 @@ class Signup extends React.Component {
         email: "",
         confirmation: "",
         error: null,
-        loading: false
+        loading: false,
+        usersRef: firebase.database().ref('user')
     }
 
     changeHandler = (e) => {
@@ -59,7 +61,16 @@ class Signup extends React.Component {
             firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
                 .then(user => {
                     console.log(user)
-                    this.setState({ loading: false })
+                    user.user.updateProfile({
+                        displayName: this.state.username,
+                        photoURL: `http://gravatar.com/avatar/${md5(user.user.email)}?d=identicon`
+                    })
+                        .then(() => {
+                            this.saveUser(user)
+                            this.setState({ loading: false })
+                        })
+                        .catch(error => this.setState({ error }))
+
                 })
                 .catch(error => {
                     console.log(error)
@@ -67,6 +78,13 @@ class Signup extends React.Component {
                 })
 
         }
+    }
+
+    saveUser = (user) => {
+        this.state.usersRef.child(user.user.uid).set({
+            name: user.user.displayName,
+            avatar: user.user.photoURL
+        })
     }
 
     render() {
